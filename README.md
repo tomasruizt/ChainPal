@@ -10,4 +10,8 @@ ChainPal solves this problem in a very simple way. It accepts cryptocurrency fro
 https://expressjs.com/en/starter/generator.html
 
 #### To run the application
-`DEBUG=chainpal:* npm start`
+```
+$ npm install express-generator -g
+$ npm install
+$ npm start
+```
