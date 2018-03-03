@@ -1,4 +1,5 @@
-const f = require('./gdaxFunctions');
+const customer = require('./gdaxFunctions/customer');
+var chainPal = require('./gdaxFunctions/chainPal');
 
 function show(a, b, c) {
     console.log(a);
@@ -6,5 +7,6 @@ function show(a, b, c) {
     console.log(c);
 }
 
-f.getAccountBalance(show);
-f.transferFundsToChainPal(show);
+customer.getAccountBalance(show);
+customer.transferFundsToChainPal(show);
+chainPal.sellETHForEUR(show);
