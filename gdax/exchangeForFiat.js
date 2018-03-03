@@ -13,7 +13,7 @@ const client = new Gdax.AuthenticatedClient(
 
 const sellCryptoForFiatCallback = (err, response, data) => {
     if (err) {
-        console.log('Error: ' + response.toString() + data.toString());
+        console.log('Error: ' + response + data);
     }
     else {
         console.log(response.statusCode);
@@ -23,12 +23,13 @@ const sellCryptoForFiatCallback = (err, response, data) => {
 
 function sellCryptoForFiat (amount, currency, price) {
     var transaction = currency.concat('-USD');
-    console.log('Selling crypto for fiat: ' + transaction);
+    console.log('Selling ' + amount.toString() + ' ' + currency.toString() + ', price: $' + price);
 
     const sellParams = {
         price: price.toString(),
         size: amount.toString(),
         product_id: transaction
     }
+
     client.sell(sellParams, sellCryptoForFiatCallback);
 }
