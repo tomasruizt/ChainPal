@@ -19,8 +19,8 @@ exports.transferFundsToChainPal = function(callback) {
  * Calls the getAccounts API. The input callback can handle the API response.
  * @param callback: The function to handle the account balance information
  */
-exports.getAccountBalance = function (callback) {
-    initClient().getAccounts(callback)
+exports.getAccountBalance = function() {
+    return initClient().getAccounts()
 };
 
 /**
@@ -29,7 +29,10 @@ exports.getAccountBalance = function (callback) {
  */
 function initClient() {
     const keys = {
-        // put real keys here.
+        "API-key": "01d9324893ad6f4d27f02b5b6ea97bc0",
+        "API-secret": "xlpYv/eG5fBlpqjZ7RK/EiYGD4pdgI8Qhh00QqUgg0lUw5OvK7N2P6mZlaW0jPYyg7NOqaD/gyBrH4CxkLeaZw==",
+        "Passphrase": "3xf2qoqpreb",
+        "Exchange-url": "https://api-public.sandbox.gdax.com"
     };
 
     return new Gdax.AuthenticatedClient(

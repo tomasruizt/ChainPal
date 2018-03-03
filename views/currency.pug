@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <img src="images/logo.svg">
+        </a>
+      </div>
+    </div>
+    <section class="section" style="text-align: center;">
+          <h3 class="title is-3">Hello #{user.username}</h3>
+          
+          
+
+          <h4 class="title is-4">You are paying <strong>$100</strong> to <strong>Jamazon</strong></h4>
+          <h6 class="title is-6">Choose currency:</h6>
+          <div class="control" style="text-align: center">
+            <div class="select">
+              
+              <select>
+              for result in accounts  
+                option #{result.currency}
+              </select>
+            </div>
+          </div>
+    </section>
+  </body>
+</html>

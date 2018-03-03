@@ -7,6 +7,12 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var accounts = require('./routes/data');
+
+var gdaxFunctions = require('./gdaxFunctions');
+
+const Gdax = require('gdax');
+const publicClient = new Gdax.PublicClient();
 
 var app = express();
 
@@ -24,9 +30,72 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+//app.use('/api/', post);
 
 app.get('/login', function(req,res){
   res.sendfile(__dirname + '/public/login.html');
+});
+
+app.get('/api', function(req,res){
+  publicClient
+  .getProducts()
+  .then(data => {
+    res.send(data)
+  })
+  .catch(error => {
+    // handle the error
+  });
+})
+
+const key = 'key';
+const secret = 'secret';
+const passphrase = 'passphrase';
+
+const apiURI = 'https://api.gdax.com';
+const sandboxURI = 'https://api-public.sandbox.gdax.com';
+
+const authedClient = new Gdax.AuthenticatedClient(
+  key,
+  secret,
+  passphrase,
+  apiURI
+);
+
+
+function show(data) {
+  console.log(data);
+}
+
+app.get('/show', function(req, res, next){
+  gdaxFunctions.getAccountBalance().then(function(result){
+    console.log(result)
+    res.render("currency", {
+      user: {"username": "Kajetan"},
+      accounts: result
+    })
+  }).catch(function(error){
+    console.log('error')
+  });
+});
+
+// Call the api with a call back
+var apiGet = function() {
+  return gdaxFunctions.getAccountBalance(show);
+};
+
+app.get('/api/show', function(req, res, next){
+  //call the api apiGet and create callback function
+  apiGet(function (data) {
+    console.log(data);
+    // res.render("currency", {
+    //   user: {"username": "Bini"},
+    //   accounts: data
+    // })
+  });
+
+  // apiGet().then(function(result){
+  //   res.render('yourTemplate', result);
+  // })
 });
 
 // catch 404 and forward to error handler
