@@ -9,7 +9,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var accounts = require('./routes/data');
 
-var gdaxFunctions = require('./gdaxFunctions');
+var chainPal = require('./gdaxFunctions/chainPal');
+var customer = require('./gdaxFunctions/customer');
 
 const Gdax = require('gdax');
 const publicClient = new Gdax.PublicClient();
@@ -61,13 +62,8 @@ const authedClient = new Gdax.AuthenticatedClient(
   apiURI
 );
 
-
-function show(data) {
-  console.log(data);
-}
-
 app.get('/show', function(req, res, next){
-  gdaxFunctions.getAccountBalance().then(function(result){
+  customer.getAccountBalance().then(function(result){
     console.log(result)
     res.render("currency", {
       user: {"username": "Kajetan"},
@@ -76,26 +72,6 @@ app.get('/show', function(req, res, next){
   }).catch(function(error){
     console.log('error')
   });
-});
-
-// Call the api with a call back
-var apiGet = function() {
-  return gdaxFunctions.getAccountBalance(show);
-};
-
-app.get('/api/show', function(req, res, next){
-  //call the api apiGet and create callback function
-  apiGet(function (data) {
-    console.log(data);
-    // res.render("currency", {
-    //   user: {"username": "Bini"},
-    //   accounts: data
-    // })
-  });
-
-  // apiGet().then(function(result){
-  //   res.render('yourTemplate', result);
-  // })
 });
 
 // catch 404 and forward to error handler

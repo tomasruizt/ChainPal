@@ -29,10 +29,7 @@ exports.getAccountBalance = function() {
  */
 function initClient() {
     const keys = {
-        "API-key": "01d9324893ad6f4d27f02b5b6ea97bc0",
-        "API-secret": "xlpYv/eG5fBlpqjZ7RK/EiYGD4pdgI8Qhh00QqUgg0lUw5OvK7N2P6mZlaW0jPYyg7NOqaD/gyBrH4CxkLeaZw==",
-        "Passphrase": "3xf2qoqpreb",
-        "Exchange-url": "https://api-public.sandbox.gdax.com"
+        // put the api key here
     };
 
     return new Gdax.AuthenticatedClient(

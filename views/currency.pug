@@ -15,22 +15,28 @@
         </a>
       </div>
     </div>
-    <section class="section" style="text-align: center;">
+    <section class="container" style="margin-top: 30px; padding: 0 30px;">
+      <div class="columns">
+        <div class="column is-one-third">
           <h3 class="title is-3">Hello #{user.username}</h3>
-          
-          
-
-          <h4 class="title is-4">You are paying <strong>$100</strong> to <strong>Jamazon</strong></h4>
+          <br />
+          <h5 class="title is-5">Your balance is: <br /><br /> 200,000</h5>
+        </div>
+        <div class="column">
           <h6 class="title is-6">Choose currency:</h6>
-          <div class="control" style="text-align: center">
+          <div class="control">
             <div class="select">
-              
               <select>
               for result in accounts  
                 option #{result.currency}
               </select>
             </div>
           </div>
+          <br />
+          <h4 class="title is-4">You are paying $100</h4>
+          <a class="button is-medium is-dark">Make Payment</a>
+        </div>
+      </div>
     </section>
   </body>
 </html>
