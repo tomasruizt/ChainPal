@@ -7,6 +7,13 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var accounts = require('./routes/data');
+
+var chainPal = require('./gdaxFunctions/chainPal');
+var customer = require('./gdaxFunctions/customer');
+
+const Gdax = require('gdax');
+const publicClient = new Gdax.PublicClient();
 
 var app = express();
 
@@ -24,9 +31,47 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+//app.use('/api/', post);
 
 app.get('/login', function(req,res){
   res.sendfile(__dirname + '/public/login.html');
+});
+
+app.get('/api', function(req,res){
+  publicClient
+  .getProducts()
+  .then(data => {
+    res.send(data)
+  })
+  .catch(error => {
+    // handle the error
+  });
+})
+
+const key = 'key';
+const secret = 'secret';
+const passphrase = 'passphrase';
+
+const apiURI = 'https://api.gdax.com';
+const sandboxURI = 'https://api-public.sandbox.gdax.com';
+
+const authedClient = new Gdax.AuthenticatedClient(
+  key,
+  secret,
+  passphrase,
+  apiURI
+);
+
+app.get('/show', function(req, res, next){
+  customer.getAccountBalance().then(function(result){
+    console.log(result)
+    res.render("currency", {
+      user: {"username": "Kajetan"},
+      accounts: result
+    })
+  }).catch(function(error){
+    console.log('error')
+  });
 });
 
 // catch 404 and forward to error handler
