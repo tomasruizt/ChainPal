@@ -1,7 +1,7 @@
 const Gdax = require('gdax');
 
 var apiKey = {
-    // fill this
+    // fill
 };
 
 const coinBaseAccountId = '';
@@ -13,28 +13,21 @@ const client = new Gdax.AuthenticatedClient(
     apiKey["Exchange-url"]
 );
 
-function sellForFiat(amount, currency, price) {
-    var transaction = currency.concat('-EUR');
-
-    const sellParams = {
-        price: price,
-        size: amount,
-        product_id: transaction
-    };
-
-    const response = client.sell(sellParams);
-    return response;
-}
-
 /**
  * Sells 0.01 ETH for EUR.
  * @return The response of the API call
  */
 exports.sellETHForEUR = function () {
-    const amount = '0.01';
-    const currency = 'ETH';
-    const price = '800';
-    const response = sellForFiat(amount, currency, price);
+    const amount = '0.01'; // ETH
+    const price = '679'; // EUR
+
+    const sellParams = {
+        price: price,
+        size: amount,
+        product_id: 'ETH-EUR'
+    };
+
+    const response = client.sell(sellParams);
     return response;
 };
 

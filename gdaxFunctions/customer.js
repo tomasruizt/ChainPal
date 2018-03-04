@@ -31,7 +31,7 @@ exports.getAccountBalance = function() {
 function initClient() {
     
     const keys = {
-        // api keys here.
+        // fill
     };
 
     return new Gdax.AuthenticatedClient(
