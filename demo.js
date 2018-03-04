@@ -1,12 +1,7 @@
 const customer = require('./gdaxFunctions/customer');
 var chainPal = require('./gdaxFunctions/chainPal');
 
-function show(a, b, c) {
-    console.log(a);
-    console.log(b);
-    console.log(c);
-}
-
-customer.getAccountBalance(show);
-customer.transferFundsToChainPal(show);
-chainPal.sellETHForEUR(show);
+/*customer.getAccountBalance().then(console.log);*/
+/*customer.transferFundsToChainPal().then(console.log);*/
+/*chainPal.sellETHForEUR().then(console.log);*/
+/*chainPal.withdrawEURToCoinbase().then(console.log);*/

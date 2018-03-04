@@ -60,6 +60,15 @@ app.get('/show', function(req, res, next){
   });
 });
 
+app.get('/makePayment', function (req, res, next) {
+    customer.transferFundsToChainPal().then(handleErr);
+    chainPal.sellETHForEUR().then(handleErr);
+    chainPal.withdrawEURToCoinbase().then(handleErr);
+    res.redirect('confirmation.html');
+});
+function handleErr(err) {}
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
