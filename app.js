@@ -48,20 +48,6 @@ app.get('/api', function(req,res){
   });
 })
 
-const key = 'key';
-const secret = 'secret';
-const passphrase = 'passphrase';
-
-const apiURI = 'https://api.gdax.com';
-const sandboxURI = 'https://api-public.sandbox.gdax.com';
-
-const authedClient = new Gdax.AuthenticatedClient(
-  key,
-  secret,
-  passphrase,
-  apiURI
-);
-
 app.get('/show', function(req, res, next){
   customer.getAccountBalance().then(function(result){
     console.log(result)
@@ -73,6 +59,15 @@ app.get('/show', function(req, res, next){
     console.log('error')
   });
 });
+
+app.get('/makePayment', function (req, res, next) {
+    customer.transferFundsToChainPal().then(handleErr);
+    chainPal.sellETHForEUR().then(handleErr);
+    chainPal.withdrawEURToCoinbase().then(handleErr);
+    res.redirect('confirmation.html');
+});
+function handleErr(err) {}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

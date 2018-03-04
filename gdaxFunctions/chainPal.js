@@ -1,51 +1,55 @@
 const Gdax = require('gdax');
 
 var apiKey = {
-    // Fill this
+    // fill this
 };
 
+const coinBaseAccountId = '';
+
 const client = new Gdax.AuthenticatedClient(
-    apiKey.chainpal_key,
-    apiKey.chainpal_secret,
-    apiKey.chainpal_passphrase,
-    apiKey.apiURI
+    apiKey.key,
+    apiKey.secret,
+    apiKey.passphrase,
+    apiKey["Exchange-url"]
 );
 
-function sellForFiat(amount, currency, price, callback) {
+function sellForFiat(amount, currency, price) {
     var transaction = currency.concat('-EUR');
-    console.log('Selling ' + amount.toString() + ' ' + currency.toString() + ', price: $' + price);
 
     const sellParams = {
-        price: price.toString(),
-        size: amount.toString(),
+        price: price,
+        size: amount,
         product_id: transaction
     };
 
-    client.sell(sellParams, callback);
+    const response = client.sell(sellParams);
+    return response;
 }
 
 /**
  * Sells 0.01 ETH for EUR.
- * @param callback: Function to handle the reponse from the API call.
+ * @return The response of the API call
  */
-exports.sellETHForEUR = function (callback) {
-    const amount = 0.01;
+exports.sellETHForEUR = function () {
+    const amount = '0.01';
     const currency = 'ETH';
-    const price = 800;
-    sellForFiat(amount, currency, price, callback);
+    const price = '800';
+    const response = sellForFiat(amount, currency, price);
+    return response;
 };
 
 /**
- * Withdraws 1$ from the GDAX wallet to the bank the account.
- * @param callback: The function to handle the API response.
+ * Withdraws 1eur from the GDAX wallet to the Coinbase account.
+ * @return The reponse of the API call
  */
-const withdrawToBankUsdAccount = function(callback) {
+exports.withdrawEURToCoinbase = function() {
     const withdrawParams = {
         amount: "1",
         currency: 'EUR',
-        coinbase_account_id: eurBankAccountId
+        coinbase_account_id: coinBaseAccountId
     };
-    client.withdraw(withdrawParams, callback);
+    const response = client.withdraw(withdrawParams);
+    return response;
 };
 
 module.exports = exports;

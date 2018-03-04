@@ -1,26 +1,27 @@
 var Gdax = require('gdax');
 
 /**
- * This function transfers 0.01 ETH to Kajetan's ETH address. In case you want to do anything with the response, you can
- * pass in a callback function.
- * @param callback: The function to handle the response of the API call.
+ * This function transfers 0.01 ETH to Kajetan's ETH address.
+ * @return The response fo the API call
  */
-exports.transferFundsToChainPal = function(callback) {
+exports.transferFundsToChainPal = function() {
     const payload = {
-        amount: 0.001,
+        amount: 0.01,
         currency: 'ETH',
         crypto_address: '0x232706dd6bbf029A80F0D61db0d456946f004984' // Kajetan's real ETH address
     };
 
-    initClient().withdrawCrypto(payload, callback);
+    var response = initClient().withdrawCrypto(payload);
+    return response;
 };
 
 /**
- * Calls the getAccounts API. The input callback can handle the API response.
- * @param callback: The function to handle the account balance information
+ * Calls the getAccounts API.
+ * @return The response of the API call
  */
 exports.getAccountBalance = function() {
-    return initClient().getAccounts()
+    var response = initClient().getAccounts();
+    return response;
 };
 
 /**
@@ -29,7 +30,7 @@ exports.getAccountBalance = function() {
  */
 function initClient() {
     const keys = {
-        // put the api key here
+        // fill this
     };
 
     return new Gdax.AuthenticatedClient(
