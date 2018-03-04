@@ -30,7 +30,7 @@ exports.getAccountBalance = function() {
  */
 function initClient() {
     const keys = {
-        // fill this
+        // fill
     };
 
     return new Gdax.AuthenticatedClient(
