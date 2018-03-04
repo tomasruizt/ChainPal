@@ -26,7 +26,7 @@
           <h6 class="title is-6">Choose currency:</h6>
           <div class="control">
             <div class="select">
-              <select>
+              <select id="currency-select">
               for result in accounts  
                 option #{result.currency}
               </select>
@@ -39,4 +39,12 @@
       </div>
     </section>
   </body>
+
+  $('#currency-select').click(function() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:1337/LEDon'
+    });
+  });
+
 </html>
