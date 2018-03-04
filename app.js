@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var accounts = require('./routes/data');
 
 var chainPal = require('./gdaxFunctions/chainPal');
 var customer = require('./gdaxFunctions/customer');
