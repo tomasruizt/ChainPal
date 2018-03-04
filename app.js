@@ -50,9 +50,9 @@ app.get('/api', function(req,res){
 
 app.get('/show', function(req, res, next){
   customer.getAccountBalance().then(function(result){
-    console.log(result)
+    //console.log(result)
     res.render("currency", {
-      user: {"username": "Kajetan"},
+      user: {"username": "Tomas"},
       accounts: result
     })
   }).catch(function(error){
@@ -66,8 +66,8 @@ app.get('/makePayment', function (req, res, next) {
     chainPal.withdrawEURToCoinbase().then(handleErr);
     res.redirect('confirmation.html');
 });
-function handleErr(err) {}
 
+function handleErr(err) {}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
